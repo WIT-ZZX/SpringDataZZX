@@ -1,4 +1,4 @@
-group 'SpringDataZZX'
+group 'com.wit'
 version '1.0'
 
 buildscript{
@@ -7,12 +7,14 @@ buildscript{
     }
     dependencies{
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.+")
+        classpath("org.flywaydb:flyway-gradle-plugin:3.+")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: "spring-boot"
+apply plugin: 'spring-boot'
+apply plugin: 'org.flywaydb.flyway'
 
 jar{
     baseName = "SpringData"
@@ -27,6 +29,33 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-gradle-plugin:1.2.+")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:1.+")
     compile("org.springframework.boot:spring-boot-starter-web:1.2+")
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    runtime("mysql:mysql-connector-java:5.+")
+}
+
+task transform(type: Exec){
+    ext.srcFile = file(sourceSets.main.resources.srcDirs[0].toString() +  "/messages.zh_CN.properties")
+    ext.destFile = file(sourceSets.main.resources.srcDirs[0].toString() + "/messages_zh_CN.properties" )
+    inputs.file srcFile
+    outputs.file destFile
+
+    workingDir = sourceSets.main.resources.srcDirs[0]
+
+    def system = System.properties['os.name']  //系统类型
+    if(system == 'linux' || system == 'Linux') {
+        commandLine 'native2ascii','-encoding','gbk','messages.zh_CN.properties','messages_zh_CN.properties'
+    }
+    else {
+        commandLine 'cmd', '/c', '\"%JAVA_HOME%\\bin\\native2ascii\" -encoding gbk messages.zh_CN.properties messages_zh_CN.properties'
+    }
+}
+processResources {
+    dependsOn transform
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked"
+    }
 }
