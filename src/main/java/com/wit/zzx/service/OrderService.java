@@ -18,8 +18,8 @@ public class OrderService implements IOrderService{
     @Override
     public List findByOrderName(String orderName) {
 
-        List list = orderRepository.findAll();
-
+//        List list = orderRepository.findAll();
+        List list = orderRepository.findByOrderName(orderName);
         return list;
     }
 }
