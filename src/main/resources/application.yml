@@ -10,11 +10,12 @@ logging:
 
 # spring
 spring:
+    profiles.active: dev
     freemarker.cache: false
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/springData?characterEncoding=utf8
-        username: root
-        password: 353441055
+        url: jdbc:mysql://127.0.0.1:3306/{databasename}?characterEncoding=utf8
+        username:
+        password: 
     jpa:
         show-sql: true
         hibernate:
