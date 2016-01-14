@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class Hello {
-    @RequestMapping("/")
-    public void hello(){
-        System.out.println("hello world!");
-    }
+//    @RequestMapping("/")
+//    public void hello(){
+//        System.out.println("hello world!");
+//    }
 }
