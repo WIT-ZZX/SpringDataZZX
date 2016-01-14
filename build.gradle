@@ -33,25 +33,25 @@ dependencies {
     runtime("mysql:mysql-connector-java:5.+")
 }
 
-task transform(type: Exec){
-    ext.srcFile = file(sourceSets.main.resources.srcDirs[0].toString() +  "/messages.zh_CN.properties")
-    ext.destFile = file(sourceSets.main.resources.srcDirs[0].toString() + "/messages_zh_CN.properties" )
-    inputs.file srcFile
-    outputs.file destFile
-
-    workingDir = sourceSets.main.resources.srcDirs[0]
-
-    def system = System.properties['os.name']  //系统类型
-    if(system == 'linux' || system == 'Linux') {
-        commandLine 'native2ascii','-encoding','gbk','messages.zh_CN.properties','messages_zh_CN.properties'
-    }
-    else {
-        commandLine 'cmd', '/c', '\"%JAVA_HOME%\\bin\\native2ascii\" -encoding gbk messages.zh_CN.properties messages_zh_CN.properties'
-    }
-}
-processResources {
-    dependsOn transform
-}
+//task transform(type: Exec){
+//    ext.srcFile = file(sourceSets.main.resources.srcDirs[0].toString() +  "/messages.zh_CN.properties")
+//    ext.destFile = file(sourceSets.main.resources.srcDirs[0].toString() + "/messages_zh_CN.properties" )
+//    inputs.file srcFile
+//    outputs.file destFile
+//
+//    workingDir = sourceSets.main.resources.srcDirs[0]
+//
+//    def system = System.properties['os.name']  //系统类型
+//    if(system == 'linux' || system == 'Linux') {
+//        commandLine 'native2ascii','-encoding','gbk','messages.zh_CN.properties','messages_zh_CN.properties'
+//    }
+//    else {
+//        commandLine 'cmd', '/c', '\"%JAVA_HOME%\\bin\\native2ascii\" -encoding gbk messages.zh_CN.properties messages_zh_CN.properties'
+//    }
+//}
+//processResources {
+//    dependsOn transform
+//}
 
 gradle.projectsEvaluated {
     tasks.withType(JavaCompile) {

@@ -33,6 +33,8 @@ public class OrderController{
     public String makeBTest(HttpServletRequest request) throws Exception{
         RequestContext requestContext = new RequestContext(request);
         System.out.println(requestContext.getMessage("id"));
+        System.out.println(requestContext.getMessage("username"));
+        System.out.println(requestContext.getMessage("password"));
         return "hello world";
     }
 }

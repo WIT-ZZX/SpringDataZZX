@@ -15,35 +15,20 @@
 </head>
 <body>
 <div align="center" class="STYLE1">
-    <p>订单表单</p>
+    <p>用户登录</p>
 </div>
 
-<form id="form" name="form" method="post" action="api/order/test_hello" target="_blank">
-    <table>
-        <tr>
-            <td>
-                <label>订单ID：</label>
-                <input name="id" type="text" />
-            </td>
-            <td>
-                <input name="btn_pass" type="submit" id="btn_pass" value="查询" />
-            </td>
-        </tr>
-    </table>
-</form>
-
-<form id="form2" name="form2" method="post" action="api/order/test" target="_blank">
-    <table>
-        <tr>
-            <td>
-                <label>客户名：</label>
-                <input name="name" type="text" />
-            </td>
-            <td>
-                <input name="btn_passed" type="submit" id="btn_passed" value="查询" />
-            </td>
-        </tr>
-    </table>
+<form id="user_form" name="user_form" method="post" action="hello" target="http://www.baidu.com">
+    <p><label>用户ID：</label>
+        <input name="id" type="text" />
+    </p>
+    <p><label>用户名：</label>
+        <input name="username" type="text" />
+    </p>
+    <p><label>密&nbsp码：</label>
+        <input name="password" type="password" />
+    </p>
+    <input name="btn_login" type="submit" id="btn_login" value="登录" />
 </form>
 </body>
 </html>
