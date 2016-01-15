@@ -1,13 +1,14 @@
 package com.wit.zzx.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by zxZhang on 16/01/14.
  */
 @Entity
 @Table(name = "t_visitor")
-public class Visitor {
+public class Visitor implements Serializable{
     private int id;
     private String username;
     private String password;
