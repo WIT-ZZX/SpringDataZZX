@@ -62,4 +62,27 @@ public class VisitorService implements IVisitorService{
         visitorRepository.save(vs);
         visitorRepository.delete(vs);
     }
+
+    @Override
+    public List<Visitor> findByName(String name) {
+        List<Visitor> list = visitorRepository.findByUsername(name);
+        return list;
+    }
+
+    @Override
+    public void update(String beforename, String aftername) {
+        List<Visitor> list = visitorRepository.findByUsername(beforename);
+        if(list.size() != 0) {
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setUsername(aftername);
+            }
+            visitorRepository.save(list);
+        }else {//若没有找到beforename,就新增aftername
+            Visitor visitor = new Visitor();
+            visitor.setUsername(aftername);
+            visitorRepository.save(visitor);
+        }
+    }
+
+
 }

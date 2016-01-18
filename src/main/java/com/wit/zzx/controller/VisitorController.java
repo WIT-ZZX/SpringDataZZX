@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Created by zxZhang on 16/01/15.
  */
@@ -66,7 +68,23 @@ public class VisitorController {
     public String deleteMore(){
         String[] names = {"aaa111","bbb111","ccc111","ddd111"};
         String[] pwds = {"aaa111","bbb111","ccc111","ddd111"};
-        iVisitorService.deleteMore(names,pwds);
+        iVisitorService.deleteMore(names, pwds);
         return "删除多条数据";
+    }
+
+    @RequestMapping("/findByName")
+    public void find(){
+        String name ="zzx";
+        List<Visitor> list =iVisitorService.findByName(name);
+        Visitor visitor = list.get(0);
+        System.out.println(visitor.getUsername());
+    }
+
+    @RequestMapping("/update")
+    public String update(){
+        String beforename = "zzzzz";
+        String aftername = "XXXXX";
+        iVisitorService.update(beforename, aftername);
+        return "修改成功";
     }
 }
