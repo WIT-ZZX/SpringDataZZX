@@ -12,16 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class Hello {
-<<<<<<< 20b48a2f48a9c2ffba551d31ce42ae80e96a8906
     @RequestMapping(value = "/hello", method = RequestMethod.POST)
     public void hello(@RequestBody Visitor visitor ,HttpRequest request){
         System.out.println("hello world!");
         System.out.println("Visitor :"+ visitor.getId()+"_____"+visitor.getUsername()+"________"+visitor.getPassword());
     }
-=======
-//    @RequestMapping("/")
-//    public void hello(){
-//        System.out.println("hello world!");
-//    }
->>>>>>> 34546b2b61b2e5fc40e0182aeaef7e23d94cfb53
+
+    @RequestMapping("/")
+    public void hello(){
+        System.out.println("hello world!");
+    }
 }
