@@ -21,11 +21,11 @@ requirejs.config({
 require
 (
     [
-        'angular','rental', './controller/indexCtrl','./service/commonService','./filter/commonFilter'
+        'angular','rental', './controller/homeCtrl','./service/commonService','./filter/commonFilter'
     ],
     function(angular)
     {
-        angular.bootstrap(document, ['rentalw']);
+        angular.bootstrap(document, ['SpringDataZZX']);
     }
 );
 
