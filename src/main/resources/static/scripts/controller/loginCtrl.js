@@ -1,5 +1,5 @@
 define(['../rental','jquery'],function(module,$){
-    module.controller("indexCtrl",function($scope, $resource, $http,commonService){
+    module.controller("loginCtrl",function($scope, $resource, $http,commonService){
         console.log("login");
     });
 });
