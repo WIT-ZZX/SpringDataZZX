@@ -1,15 +1,15 @@
 define([], function () {
     return {
-        defaultRoutePath: '/web/notFound',
+        defaultRoutePath: '/web/order',
         routes: {
             '/': {
-                templateUrl: '/index.html',
+                templateUrl: './view/home.html',
                 dependencies: [
-                    'controller/indexCtrl'
+                    'controller/homeCtrl'
                 ]
             },
-            '/login': {
-                templateUrl: '/view/login.html',
+            '/web/login': {
+                templateUrl: './view/login.html',
                 dependencies: [
                     'controller/loginCtrl'
                 ]

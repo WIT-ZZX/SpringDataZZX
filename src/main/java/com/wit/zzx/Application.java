@@ -2,6 +2,7 @@ package com.wit.zzx;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Created by zxZhang on 16/01/05.

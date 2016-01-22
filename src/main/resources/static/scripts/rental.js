@@ -1,6 +1,6 @@
 define(['angular','routes','./service/dependencyResolverFor','angularResource','angularSanitize','angularRoute','bootstrap'], function(angular,config, dependencyResolverFor)
 {
-    var app = angular.module('rentalw', [ 'ngResource', 'ngSanitize', 'ngRoute']);
+    var app = angular.module('SpringDataZZX', [ 'ngResource', 'ngSanitize', 'ngRoute']);
     app.config(
         [
             '$routeProvider',

@@ -1,5 +1,5 @@
 define(['../rental','jquery'],function(module,$){
-    module.controller("indexCtrl",function($scope, $resource,$location, $http,commonService){
+    module.controller("homeCtrl",function($scope, $resource,$location, $http,commonService){
         console.log("index");
     //用户登录
     var loginApi = $resource("/api/user/:id");
@@ -10,8 +10,8 @@ define(['../rental','jquery'],function(module,$){
     console.log($scope.username+"---"+$scope.password);
         loginApi.get({id:1},{params:{username:$scope.username,password:$scope.password}},function(data){
             console.log(JSON.stringify(data.message));
-            alert("访问api成功");
-            window.location.href="/login";//跳转不成功，此处仍待改进
+            $location.path("/web/login");//跳转成功
+            //window.location.href="/web/login";//跳转不成功
         },function (errData) {
             alert("访问出错");
             console.log(errData);
