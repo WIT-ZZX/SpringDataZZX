@@ -11,4 +11,6 @@ import java.util.List;
 public interface VisitorRepository extends CrudRepository<Visitor, Integer> {
 
     List<Visitor> findByUsername(String username);
+
+    List<Visitor> findById(int id);
 }

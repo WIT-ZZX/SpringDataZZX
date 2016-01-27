@@ -1,6 +1,8 @@
 package com.wit.zzx.controller;
 
+import com.wit.zzx.entity.Visitor;
 import com.wit.zzx.redis.IRedisCacheService;
+import com.wit.zzx.repository.VisitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,9 @@ public class RedisController {
     @Autowired
     IRedisCacheService iRedisCacheService;
 
+    @Autowired
+    VisitorRepository visitorRepository;
+
     @RequestMapping(value = "/add")
     public String addRedis(){
         String key ="123";
@@ -30,16 +35,29 @@ public class RedisController {
         return "add2Redis success";
     }
 
-    @RequestMapping(value = "get/{key}")
+    @RequestMapping(value = "/get/{key}")
     public String getRedis(@PathVariable("key")String key){
         List l = iRedisCacheService.getMessage(key);
 //        System.out.println("............."+l.size());
         return "redis del success";
     }
 
-    @RequestMapping(value = "del/{key}")
+    @RequestMapping(value = "/del/{key}")
     public String delKey(@PathVariable("key")String key){
         iRedisCacheService.clear(key);
         return "delete "+key+" success";
+    }
+
+    @RequestMapping(value = "/putObj/{id}")
+    public String putObj(@PathVariable("id")int id){
+        List<Visitor> list = visitorRepository.findById(id);
+        if(list.size()!=0){
+            iRedisCacheService.putObject(list.get(0));
+            return "存取一个对象到redis";
+        }else {
+            return "id未找到对象";
+        }
+
+
     }
 }

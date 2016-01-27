@@ -1,12 +1,16 @@
 package com.wit.zzx.redis;
 
+import com.wit.zzx.entity.Visitor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zxZhang on 16/01/22.
@@ -17,8 +21,13 @@ public class RedisCacheService implements IRedisCacheService{
     @Autowired
     RedisTemplate<String,String> objectRedisTemplate;
 
-    @Resource(name = "objectRedisTemplate")//引入redis配置
+    @Autowired
+    RedisTemplate<String, Object> objectRedisTemplates;
+
+    @Resource(name = "objectRedisTemplate")//引入redisConfig
     private ListOperations<String, String> listOperations;
+
+    private BoundHashOperations<String,String ,String> boundHashOperations;
 
     @Override
     public void addMessage(String key, String value) {
@@ -43,8 +52,13 @@ public class RedisCacheService implements IRedisCacheService{
     }
 
     @Override
-    public void putObject() {
-
+    public void putObject(Visitor visitor) {
+        boundHashOperations = objectRedisTemplates.boundHashOps("visitor:" + visitor.getId());
+        Map<String,String> data = new HashMap<String,String>();
+        data.put("id",""+visitor.getId());
+        data.put("username",visitor.getUsername());
+        data.put("password",visitor.getPassword());
+        boundHashOperations.putAll(data);
     }
 
 

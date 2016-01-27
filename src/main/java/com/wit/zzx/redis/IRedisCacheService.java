@@ -1,5 +1,7 @@
 package com.wit.zzx.redis;
 
+import com.wit.zzx.entity.Visitor;
+
 import java.util.List;
 
 /**
@@ -12,5 +14,5 @@ public interface IRedisCacheService {
 
     void clear(String key);
 
-    void putObject();
+    public void putObject(Visitor visitor);
 }
