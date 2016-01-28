@@ -70,6 +70,12 @@ public class VisitorService implements IVisitorService{
     }
 
     @Override
+    public List<Visitor> findById(int id) {
+        List<Visitor> list = visitorRepository.findById(id);
+        return list;
+    }
+
+    @Override
     public void update(String beforename, String aftername) {
         List<Visitor> list = visitorRepository.findByUsername(beforename);
         if(list.size() != 0) {

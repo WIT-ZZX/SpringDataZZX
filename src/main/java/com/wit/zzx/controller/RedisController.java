@@ -48,16 +48,57 @@ public class RedisController {
         return "delete "+key+" success";
     }
 
+    /**
+     * 存一个对象hash到redis
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/putObj/{id}")
     public String putObj(@PathVariable("id")int id){
         List<Visitor> list = visitorRepository.findById(id);
+
         if(list.size()!=0){
-            iRedisCacheService.putObject(list.get(0));
+//            iRedisCacheService.putObject(list.get(0));
+            for(Visitor v :list){
+                iRedisCacheService.putObject(v);
+            }
             return "存取一个对象到redis";
         }else {
             return "id未找到对象";
         }
 
 
+    }
+
+    /**
+     * 存多个对象hash到redis
+     * @param name
+     * @return
+     */
+    @RequestMapping(value = "/put2Obj/{name}")
+    public String putMoreObj(@PathVariable("name")String name){
+        List<Visitor> list = visitorRepository.findByUsername(name);
+        if(list.size()!=0){
+            for(Visitor v :list){
+                iRedisCacheService.putObject(v);
+            }
+            return "存取多个对象到redis";
+        }else {
+            return "根据"+name+"未找到对象";
+        }
+    }
+
+    /**
+     * 从Redis取一个对象
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getObj/{id}")
+    public String getObj(@PathVariable("id")int id){
+        List<Visitor> list = iRedisCacheService.getObj(id);
+        if(list.size()!=0){
+            return "id:"+list.get(0).getId()+" username:"+list.get(0).getUsername()+" password:"+list.get(0).getPassword();
+        }else
+            return "Not　Found";
     }
 }

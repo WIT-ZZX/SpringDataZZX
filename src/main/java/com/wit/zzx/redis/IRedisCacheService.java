@@ -15,4 +15,6 @@ public interface IRedisCacheService {
     void clear(String key);
 
     public void putObject(Visitor visitor);
+
+    List<Visitor> getObj(int id);
 }

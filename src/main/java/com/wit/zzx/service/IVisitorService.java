@@ -22,4 +22,6 @@ public interface IVisitorService {
     void update(String beforename, String aftername);
 
     List<Visitor> findByName(String name);
+
+    List<Visitor> findById(int id);
 }

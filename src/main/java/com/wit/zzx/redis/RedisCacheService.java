@@ -3,11 +3,13 @@ package com.wit.zzx.redis;
 import com.wit.zzx.entity.Visitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +61,21 @@ public class RedisCacheService implements IRedisCacheService{
         data.put("username",visitor.getUsername());
         data.put("password",visitor.getPassword());
         boundHashOperations.putAll(data);
+    }
+
+    @Override
+    public List<Visitor> getObj(int id) {
+        HashOperations hashOperations = objectRedisTemplate.opsForHash();
+        String ids = (String) hashOperations.get("visitor:" + id, "id");
+        String username = (String) hashOperations.get("visitor:" + id,"username");
+        String password = (String) hashOperations.get("visitor:" + id,"password");
+        Visitor visitor = new Visitor();
+        visitor.setId(Integer.parseInt(ids));
+        visitor.setUsername(username);
+        visitor.setPassword(password);
+        List<Visitor> list = new ArrayList<>();
+        list.add(visitor);
+        return list;
     }
 
 
